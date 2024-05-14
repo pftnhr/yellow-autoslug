@@ -15,20 +15,20 @@ class YellowAutoslug {
     public function onEditContentFile($page, $action, $email) {
         if (($action=="precreate" || $action=="preedit") && !$page->isExisting("titleSlug")) {
             $replaceData = $this->getReplaceData();
-            $titleSlug = str_replace(array_keys($replaceData), array_values($replaceData), $this->trimContent());
+            $titleSlug = str_replace(array_keys($replaceData), array_values($replaceData), $this->trimContent($page));
             $page->rawData = $this->yellow->toolbox->setMetaData($page->rawData, "titleSlug", $titleSlug);
         }
     }
     
     // trim the content to 25 characters
-    public function trimContent() {
-        if (null !== $this->yellow->page->getContentRaw()) {
-            $output = $this->yellow->page->getContentRaw();
+    public function trimContent($page) {
+        if (null !== $page->getContentRaw()) {
+            $output = $page->getContentRaw();
             $length = $this->yellow->system->get("autoslugLength");
             if (strlenu($output) > $length) {
                 $output = substru($output, 0, $length);
             }
-            $output = $output.$this->yellow->page->getDate("published", "Ymd");
+            $output = $output."-".date("Ymd");
             $output = strtoloweru($output);
             $output = preg_replace("/[^\pL\d\-]+/u", "-", $output);
             $output = preg_replace("/^-+|-+$/", "", $output);
