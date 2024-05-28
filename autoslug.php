@@ -17,6 +17,7 @@ class YellowAutoslug {
             $replaceData = $this->getReplaceData();
             $titleSlug = str_replace(array_keys($replaceData), array_values($replaceData), $this->trimContent($page));
             $page->rawData = $this->yellow->toolbox->setMetaData($page->rawData, "titleSlug", $titleSlug);
+            // $page->rawData = $this->yellow->toolbox->setMetaData($page->rawData, "title", $titleSlug);
         }
     }
     

@@ -16,6 +16,12 @@ The following settings can be configured in file `system/extensions/yellow-syste
 
 `autoslugLength` = maximum length of the TitleSlug, excluding the date (e.g. `-20240507`). Default is `25`.
 
+If you don't display titles in your blog and don't really use them, you can uncomment line 20:
+
+`$page->rawData = $this->yellow->toolbox->setMetaData($page->rawData, "title", $titleSlug);`
+
+This replaces the title of the blog post with the created TitleSlug.
+
 ## Acknowledgements
 
 Many thanks to Mark Seuffert from [Yellow](https://github.com/datenstrom/yellow/) for the original [code](https://github.com/datenstrom/yellow/discussions/372#discussioncomment-244418) and the customisation of the `edit.php` so that everything works as it should.
